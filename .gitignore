@@ -1,5 +1,5 @@
 .idea
 venv
-*.txt
+patterns.txt
 .env
 *.md.backup
