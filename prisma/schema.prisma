@@ -1,0 +1,46 @@
+datasource db {
+    provider = "sqlite"
+    url      = "file:database/application.db"
+}
+
+generator db {
+    provider             = "prisma-client-py"
+    interface            = "asyncio"
+    recursive_type_depth = 5
+}
+
+model UsersListed {
+    id          String   @id @default(cuid())
+    created_at  DateTime @default(now())
+    url         String   @unique
+    connections Int      @map("number_of_connections")
+
+    users_information UsersInformation?
+    user_contacts     UsersContacts?
+}
+
+model UsersInformation {
+    userId   String @id @unique @map("user_id")
+    name     String
+    location String
+    role     String
+    status   String
+    birthday String
+
+    users_listed UsersListed @relation(fields: [userId], references: [id])
+}
+
+model UsersContacts {
+    userId        String  @id @unique @map("user_id")
+    phone         String? @unique
+    email         String? @unique
+    emailProvider String? @map("email_provider")
+
+    users_listed UsersListed @relation(fields: [userId], references: [id])
+}
+
+model SupportedLinks {
+    id            String @id @default(cuid())
+    platform      String @unique
+    link          String
+}

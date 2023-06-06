@@ -1,9 +1,10 @@
-from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-def chrome_setup():
+def chrome_setup() -> WebDriver:
     chrome_options = Options()
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
