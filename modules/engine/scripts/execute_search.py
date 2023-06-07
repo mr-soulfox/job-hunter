@@ -1,0 +1,10 @@
+from selenium.common.exceptions import InvalidElementStateException
+from selenium.webdriver import Keys
+from selenium.webdriver.remote.webelement import WebElement
+
+
+def execute(element: WebElement, stack: str, sleep: any):
+    element.click()
+    element.clear()
+    element.send_keys(f"{stack} vagas")
+    element.send_keys(Keys.RETURN)

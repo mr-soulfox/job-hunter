@@ -17,12 +17,13 @@ load_dotenv()
 def main(
         platform: Annotated[str, typer.Option(help="Only linkedin")],
         stack: Annotated[str, typer.Option(help="Stack you wants search")],
-        delay: Annotated[int, typer.Option(help="Delay per operation (seconds)")] = 3
+        delay: Annotated[int, typer.Option(help="Delay per operation (seconds)")] = 3,
+        scroll: Annotated[int, typer.Option(help="Quantity of scroll down repeats")] = 5
 ) -> None:
     if run(Links().platform_exist(platform)):
         link: str = run(Links().return_link(platform=platform.lower()))
 
-        search_engine = SearchEngine(link, stack, delay)
+        search_engine = SearchEngine(link, platform, stack, scroll, delay)
         search_engine.search()
         return
 
