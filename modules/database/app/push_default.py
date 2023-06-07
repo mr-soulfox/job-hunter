@@ -1,12 +1,13 @@
 from prisma import Prisma
 from os import path
 import json
-from asyncio import run
 from modules.database.app.links import Links
 
 
-def push_data_default():
-    database: Prisma = run(Links.connect(Prisma()))
+async def push_data_default():
+    database: Prisma = Prisma()
+    await Links.connect(database)
+
     json_data: dict
 
     with open(path.join(path.dirname(__file__), "default.json")) as f:
@@ -18,4 +19,4 @@ def push_data_default():
         'link': json_data.get("default")["url"]
     })
 
-    await run(Links.connect(database, True))
+    await Links.connect(database, True)

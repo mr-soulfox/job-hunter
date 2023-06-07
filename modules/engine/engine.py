@@ -10,13 +10,15 @@ from .scripts.verify_page import verify_if_exist
 class SearchEngine:
     driver: WebDriver
     url: str
+    platform: str
     stack: str
     sleep_time: int
 
-    def __init__(self, url: str, stack: str, sleep_time: int = 3):
+    def __init__(self, url: str, platform: str, stack: str, sleep_time: int = 3):
         self.url = url
         self.stack = stack
         self.sleep_time = sleep_time
+        self.platform = platform
         self.driver = chrome_setup()
 
     def sleep(self) -> None:
@@ -36,9 +38,12 @@ class SearchEngine:
             driver.get(self.url)
             self.sleep()
 
-            if self.url.find("linkedin") != -1:
+            if self.platform == "linkedin":
                 linkedin_search = LinkedinSearch(self.driver, self.stack, self.sleep)
                 linkedin_search.execute()
                 self.sleep()
                 self.sleep()
                 self.sleep()
+                return
+
+        return
