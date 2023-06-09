@@ -2,10 +2,10 @@ import requests
 from requests.exceptions import ConnectionError
 from selenium.webdriver.chrome.webdriver import WebDriver
 import time
-from .config.set_chrome_driver import chrome_setup
-from .operation.linkedin import LinkedinSearch
-from .scripts.verify_page import verify_if_exist
+from modules.engine.config.set_chrome_driver import chrome_setup
+from modules.engine.scripts.verify_page import verify_if_exist
 from modules.engine.scripts.execute_operation import execute
+
 
 class SearchEngine:
     driver: WebDriver

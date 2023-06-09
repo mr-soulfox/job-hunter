@@ -13,19 +13,19 @@ model UsersListed {
     id          String   @id @default(cuid())
     created_at  DateTime @default(now())
     url         String   @unique
-    connections Int      @map("number_of_connections")
+    company     String   @default("None")
 
     users_information UsersInformation?
     user_contacts     UsersContacts?
 }
 
 model UsersInformation {
-    userId   String @id @unique @map("user_id")
-    name     String
-    location String
-    role     String
-    status   String
-    birthday String
+    userId    String  @id @unique @map("user_id")
+    public_id String  @unique
+    name      String
+    location  String
+    role      String
+    isStudent Boolean @default(false)
 
     users_listed UsersListed @relation(fields: [userId], references: [id])
 }

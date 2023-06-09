@@ -22,11 +22,10 @@ def main(
 ) -> None:
     if run(Links().platform_exist(platform)):
         link: str = run(Links().return_link(platform=platform.lower()))
-
         search_engine = SearchEngine(link, platform, stack, scroll, delay)
         search_engine.search()
         return
-
+    
     typer.echo("Platform don't exist")
 
 
@@ -36,19 +35,18 @@ def add(
     link: Annotated[str, typer.Option(help="Entrypoint to start operation")]
 ) -> None:
     exist_errors = verify_errors(platform=platform, link=link)
-
     if not exist_errors:
         run(Links().save_link(platform=platform, link=link))
-
-    return
+        if run(Links().link_exist(link, True)):
+            typer.echo("Added with success!")
 
 
 @app.command("load-default")
 def load_default() -> None:
     default_is_loaded: bool or str = run(Links().return_link(platform="linkedin"))
-
     if default_is_loaded:
         run(push_data_default())
+        return
 
 
 if __name__ == "__main__":

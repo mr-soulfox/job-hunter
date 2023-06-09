@@ -1,5 +1,6 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from os import path
+from modules.engine.operation.Linkedin.get_info import get_user_info
 
 
 def save(driver: WebDriver, sleep: any) -> None:
@@ -11,5 +12,4 @@ def save(driver: WebDriver, sleep: any) -> None:
         sleep()
         file.close()
 
-    for link in list_users:
-        print(link)
+    get_user_info(list_users[0])
