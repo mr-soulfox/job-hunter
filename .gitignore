@@ -3,4 +3,4 @@ venv
 patterns.txt
 .env
 *.md.backup
-temp
+temp_info

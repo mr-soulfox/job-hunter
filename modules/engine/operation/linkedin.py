@@ -38,3 +38,5 @@ class LinkedinSearch:
 
         save_user_list(self.driver, self.sleep)
         self.sleep()
+
+        self.driver.close()
