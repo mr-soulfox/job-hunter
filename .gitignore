@@ -1,6 +1,6 @@
 .idea
 venv
-patterns.txt
 .env
 *.md.backup
 temp_info
+temp/*.csv
